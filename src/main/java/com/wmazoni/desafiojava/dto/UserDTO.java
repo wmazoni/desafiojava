@@ -3,6 +3,7 @@ package com.wmazoni.desafiojava.dto;
 import com.wmazoni.desafiojava.entities.Telephone;
 import com.wmazoni.desafiojava.entities.User;
 
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -13,9 +14,14 @@ public class UserDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private UUID id;
+
+
     private String name;
+
+    @NotEmpty
     private String email;
 
+    @NotEmpty
     private String password;
     private Instant created;
     private Instant modified;
@@ -27,6 +33,7 @@ public class UserDTO implements Serializable {
 
     public UserDTO(UUID id, String name, String email, String password) {
         this.id = id;
+
 
         this.name = name;
         this.email = email;

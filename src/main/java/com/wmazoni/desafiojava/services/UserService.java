@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -28,6 +29,9 @@ public class UserService {
 
     @Autowired
     private TelephoneRepository telephoneRepository;
+
+    @Autowired
+    private BCryptPasswordEncoder pe;
 
     @Transactional(readOnly = true)
     public Page<UserDTO> findAllPaged(PageRequest pageRequest) {
@@ -80,7 +84,7 @@ public class UserService {
     private void copyDTOToEntity(UserDTO dto, User entity, Telephone phone) {
         entity.setName(dto.getName());
         entity.setEmail(dto.getEmail());
-        entity.setPassword(dto.getPassword());
+        entity.setPassword(pe.encode(dto.getPassword()));
 
         dto.getPhones().forEach(x -> {
             phone.setDdd(x.getDdd());

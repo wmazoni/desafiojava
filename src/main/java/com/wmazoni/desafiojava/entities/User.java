@@ -1,11 +1,13 @@
 package com.wmazoni.desafiojava.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.wmazoni.desafiojava.entities.enums.Perfil;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "tb_user")
@@ -22,6 +24,8 @@ public class User implements Serializable {
 
     @Column(unique = true)
     private String email;
+
+    @JsonIgnore
     private String password;
 
     @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
@@ -34,9 +38,12 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "user")
     List<Telephone> phones = new ArrayList<>();
 
-
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "PERFIS")
+    private Set<Integer> perfis = new HashSet<>();
 
     public User() {
+        addPerfil(Perfil.USERS);
     }
 
     public User(UUID id, String name, String email, String password) {
@@ -44,6 +51,7 @@ public class User implements Serializable {
         this.name = name;
         this.email = email;
         this.password = password;
+        addPerfil(Perfil.USERS);
 
     }
 
@@ -93,6 +101,14 @@ public class User implements Serializable {
 
     public Instant getModified() {
         return modified;
+    }
+
+    public Set<Perfil> getPerfis() {
+        return perfis.stream().map(Perfil::toEnum).collect(Collectors.toSet());
+    }
+
+    public void addPerfil(Perfil perfil) {
+        perfis.add(perfil.getCod());
     }
 
     @PrePersist
