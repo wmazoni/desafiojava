@@ -21,7 +21,7 @@ import java.util.UUID;
 
 
 @Service
-public class UserServices {
+public class UserService {
 
     @Autowired
     private UserRepository userRepository;

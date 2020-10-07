@@ -1,7 +1,7 @@
 package com.wmazoni.desafiojava.resources;
 
 import com.wmazoni.desafiojava.dto.UserDTO;
-import com.wmazoni.desafiojava.services.UserServices;
+import com.wmazoni.desafiojava.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,7 +19,7 @@ import java.util.UUID;
 public class UserResources {
 
     @Autowired
-    private UserServices service;
+    private UserService service;
 
     @GetMapping
     public ResponseEntity<Page<UserDTO>> findAll(

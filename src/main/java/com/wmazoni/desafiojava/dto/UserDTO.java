@@ -5,7 +5,9 @@ import com.wmazoni.desafiojava.entities.User;
 
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 public class UserDTO implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -13,6 +15,7 @@ public class UserDTO implements Serializable {
     private UUID id;
     private String name;
     private String email;
+
     private String password;
     private Instant created;
     private Instant modified;
@@ -24,6 +27,7 @@ public class UserDTO implements Serializable {
 
     public UserDTO(UUID id, String name, String email, String password) {
         this.id = id;
+
         this.name = name;
         this.email = email;
         this.password = password;

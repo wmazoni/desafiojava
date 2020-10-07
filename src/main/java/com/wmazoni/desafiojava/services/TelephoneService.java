@@ -18,7 +18,7 @@ import javax.persistence.EntityNotFoundException;
 import java.util.Optional;
 
 @Service
-public class TelephoneServices {
+public class TelephoneService {
 
     @Autowired
     private TelephoneRepository repository;
