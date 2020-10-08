@@ -3,7 +3,6 @@ package com.wmazoni.desafiojava.dto;
 import com.wmazoni.desafiojava.entities.Telephone;
 
 import java.io.Serializable;
-import java.util.UUID;
 
 public class TelephoneDTO implements Serializable {
     private static final long serialVersionUID = 1L;

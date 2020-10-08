@@ -9,16 +9,15 @@ import com.wmazoni.desafiojava.services.exceptions.DatabaseException;
 import com.wmazoni.desafiojava.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.dao.EmptyResultDataAccessException;
-import javax.persistence.EntityNotFoundException;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.Optional;
-import java.util.UUID;
 
 
 @Service
@@ -40,7 +39,7 @@ public class UserService {
     }
 
     @Transactional(readOnly = true)
-    public UserDTO findById(UUID id) {
+    public UserDTO findById(Long id) {
         Optional<User> obj = userRepository.findById(id);
         User entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not found"));
         return new UserDTO(entity, entity.getPhones());
@@ -59,7 +58,7 @@ public class UserService {
     }
 
     @Transactional
-    public UserDTO update(UUID id, UserDTO dto) {
+    public UserDTO update(Long id, UserDTO dto) {
         try {
             User entity = userRepository.getOne(id);
             //copyDTOToEntity(dto, entity, phone);
@@ -70,7 +69,7 @@ public class UserService {
         }
     }
 
-    public void delete(UUID id) {
+    public void delete(Long id) {
         try {
             userRepository.deleteById(id);
         }

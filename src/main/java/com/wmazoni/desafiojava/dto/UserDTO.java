@@ -8,12 +8,11 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public class UserDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private UUID id;
+    private Long id;
 
 
     private String name;
@@ -31,7 +30,7 @@ public class UserDTO implements Serializable {
     public UserDTO() {
     }
 
-    public UserDTO(UUID id, String name, String email, String password) {
+    public UserDTO(Long id, String name, String email, String password) {
         this.id = id;
 
 
@@ -55,11 +54,11 @@ public class UserDTO implements Serializable {
         this.modified = entity.getModified();
     }
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
